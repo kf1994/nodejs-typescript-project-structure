@@ -5,6 +5,8 @@ import helmet from "helmet";
 import flash from "connect-flash";
 import cookieParser from "cookie-parser";
 
+import {port} from "./config"
+
 process.on("uncaughtException", (e: any) => {
   console.error(e);
 });
@@ -44,9 +46,9 @@ const init = () => {
     /**
      * starting server
      */
-    app.listen(process.env.PORT)
+    app.listen(port)
         .on("error", (error: any) => console.error(error))
-        .on("listening", () => console.log(`Express listening on ${process.env.PORT}`));
+        .on("listening", () => console.log(`Express listening on ${port}`));
   } catch (error) {
     console.error("Error in initializing", error);
   }
