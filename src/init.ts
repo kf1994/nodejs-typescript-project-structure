@@ -5,10 +5,13 @@ import helmet from "helmet";
 import flash from "connect-flash";
 import cookieParser from "cookie-parser";
 
-import {port} from "./config"
+import {port} from "./config";
+import createLogger from "./core/Logger";
+
+const logger = createLogger("init");
 
 process.on("uncaughtException", (e: any) => {
-  console.error(e);
+  logger.error(e);
 });
 
 const init = () => {
@@ -47,10 +50,10 @@ const init = () => {
      * starting server
      */
     app.listen(port)
-        .on("error", (error: any) => console.error(error))
-        .on("listening", () => console.log(`Express listening on ${port}`));
+        .on("error", (error: any) => logger.error(error))
+        .on("listening", () => logger.info(`Express listening on ${port}`));
   } catch (error) {
-    console.error("Error in initializing", error);
+    logger.error("Error in initializing", error);
   }
 };
 
