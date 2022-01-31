@@ -6,6 +6,7 @@ import flash from "connect-flash";
 import cookieParser from "cookie-parser";
 
 import { environment, port } from "./config";
+import appRoutes from "./route-handler";
 import createLogger from "./core/Logger";
 import { BaseException, NotFoundError, InternalError } from "./core/Exceptions";
 
@@ -43,7 +44,7 @@ const init = () => {
     /**
      * Attaching routes to server
      */
-    app.get("/", (req: Request, res: Response) => res.status(200).send("Hello World!"));
+    app.use("/", appRoutes);
 
     /**
      * Error handling
