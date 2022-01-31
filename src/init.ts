@@ -5,14 +5,13 @@ import helmet from "helmet";
 import flash from "connect-flash";
 import cookieParser from "cookie-parser";
 
-import {port} from "./config";
+import { environment, port } from "./config";
 import createLogger from "./core/Logger";
+import { BaseException, NotFoundError, InternalError } from "./core/Exceptions";
 
 const logger = createLogger("init");
 
-process.on("uncaughtException", (e: any) => {
-  logger.error(e);
-});
+process.on("uncaughtException", (e: any) => logger.error(e));
 
 const init = () => {
   try {
@@ -45,6 +44,22 @@ const init = () => {
      * Attaching routes to server
      */
     app.get("/", (req: Request, res: Response) => res.status(200).send("Hello World!"));
+
+    /**
+     * Error handling
+     */
+    app.use((req, res) => BaseException.handle(new NotFoundError(), res));
+    app.use((err: Error, req: Request, res: Response) => {
+      if (err instanceof BaseException) {
+        BaseException.handle(err, res);
+      } else {
+        if (environment === "development") {
+          logger.error(err);
+          return res.status(500).send(err.message);
+        }
+        BaseException.handle(new InternalError(), res);
+      }
+    });
 
     /**
      * starting server
