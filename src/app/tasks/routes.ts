@@ -1,7 +1,7 @@
 import express from "express";
 import { create, deleteOne, findOne, list, update } from "./controller";
 import { listValidator } from "./validation";
-import { validate } from "../../common/middlewares/validate.middleware";
+import { validate } from "../../common/middlewares/validate";
 
 const router = express.Router();
 

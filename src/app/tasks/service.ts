@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-class TasksService {
+class Service {
 	req: Request;
 	res: Response;
 
@@ -35,4 +35,4 @@ class TasksService {
 	}
 }
 
-export default TasksService;
+export default Service;
