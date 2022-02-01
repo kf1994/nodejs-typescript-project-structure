@@ -51,6 +51,7 @@ const init = () => {
      */
     app.use((req, res) => BaseException.handle(new NotFoundError(), res));
     app.use((err: Error, req: Request, res: Response) => {
+      console.log("err");
       if (err instanceof BaseException) {
         BaseException.handle(err, res);
       } else {

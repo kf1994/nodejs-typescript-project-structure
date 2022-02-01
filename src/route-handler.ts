@@ -22,7 +22,7 @@ app.use("/", (req: Request, res: Response, next: NextFunction) => {
  * Adding middleware on all routes end to print route name, request name, time taken
  */
 app.use((req: Request, res: Response, next: NextFunction) => {
-	res.on("finish", async () => {
+	res.on("finish", () => {
 		try {
 			const endTime = new Date();
 			const responseTime = endTime.getTime() - req.startTime.getTime();

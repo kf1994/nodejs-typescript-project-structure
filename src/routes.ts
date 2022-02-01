@@ -1,15 +1,13 @@
 import express, { Request, Response } from "express";
-import TasksService from "./app/tasks/service";
+
+import TasksRoutes from "./app/tasks/routes";
 
 const router = express.Router();
 
 /**
- * TODO: Attach new routes here
+ * Attaching Other Modules
  */
-router.post("/", (req: Request, res: Response) => new TasksService(req, res).create());
-router.put("/", (req: Request, res: Response) => new TasksService(req, res).update());
-router.delete("/", (req: Request, res: Response) => new TasksService(req, res).deleteOne());
-router.get("/", (req: Request, res: Response) => new TasksService(req, res).list());
-router.get("/:id", (req: Request, res: Response) => new TasksService(req, res).findOne());
+router.get("/", (req: Request, res: Response) => res.status(200).send("Hello World!"));
+router.use("/tasks", TasksRoutes);
 
 export default router;

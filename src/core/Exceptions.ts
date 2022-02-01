@@ -1,10 +1,16 @@
 import { Response } from "express";
-import { AuthenticationFailedResponse, InternalErrorResponse, NotFoundResponse } from "./Responses";
+import {
+	AuthenticationFailedResponse,
+	DataValidationFailedResponse,
+	InternalErrorResponse,
+	NotFoundResponse,
+} from "./Responses";
 
 enum ErrorType {
 	UNAUTHORIZED = "AuthenticationFailed",
 	NOT_FOUND = "NotFoundError",
-	INTERNAL = "InternalError"
+	INTERNAL = "InternalError",
+	DATA_VALIDATION_FAILED = "InvalidRequestData",
 }
 
 export abstract class BaseException extends Error {
@@ -22,6 +28,8 @@ export abstract class BaseException extends Error {
 				return new AuthenticationFailedResponse(err.message).send(res);
 			case ErrorType.NOT_FOUND:
 				return new NotFoundResponse(err.message).send(res);
+			case ErrorType.DATA_VALIDATION_FAILED:
+				return new DataValidationFailedResponse(err.message, err.data).send(res);
 			default:
 				return new InternalErrorResponse(err.message).send(res);
 		}
@@ -49,5 +57,11 @@ export class NotFoundError extends BaseException {
 export class InternalError extends BaseException {
 	constructor(message = "Internal Error") {
 		super(ErrorType.INTERNAL, message);
+	}
+}
+
+export class DataValidationFailed extends BaseException {
+	constructor(message = "Invalid Request Data", protected data: any) {
+		super(ErrorType.DATA_VALIDATION_FAILED, message, data);
 	}
 }

@@ -59,3 +59,13 @@ export class SuccessResponse<T> extends ApiResponse {
 		return super.prepare<SuccessResponse<T>>(res, this);
 	}
 }
+
+export class DataValidationFailedResponse<T> extends ApiResponse {
+	constructor(message: string, private data: T) {
+		super(StatusCode.BAD_REQUEST, message);
+	}
+
+	send(res: Response): Response {
+		return super.prepare<DataValidationFailedResponse<T>>(res, this);
+	}
+}
