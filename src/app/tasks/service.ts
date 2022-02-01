@@ -1,9 +1,37 @@
-import CommonBaseService from '../../common/base.service';
+import { Request, Response } from "express";
 
-class TasksService extends CommonBaseService {
-	public async getResponse() {
+class TasksService {
+	req: Request;
+	res: Response;
 
-		return this.res.status(200).send({ message: 'Hello world!' });
+	constructor(request: Request, response: Response) {
+		this.req = request;
+		this.res = response;
+	}
+
+	public create() {
+
+		return this.res.status(200).send({ message: "Created!" });
+	}
+
+	public update() {
+
+		return this.res.status(200).send({ message: "update!" });
+	}
+
+	public deleteOne() {
+
+		return this.res.status(200).send({ message: "deleteOne" });
+	}
+
+	public findOne() {
+
+		return this.res.status(200).send({ message: "findOne" });
+	}
+
+	public list() {
+
+		return this.res.status(200).send({ message: "List" });
 	}
 }
 
