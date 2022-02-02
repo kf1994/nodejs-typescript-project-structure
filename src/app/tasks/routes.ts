@@ -1,14 +1,14 @@
 import express from "express";
 import { create, deleteOne, findOne, list, update } from "./controller";
-import { listValidator } from "./validation";
+import { createValidator } from "./validation";
 import { validate } from "../../common/middlewares/validate";
 
 const router = express.Router();
 
-router.post("/", create);
+router.post("/", createValidator, create);
 router.put("/", update);
 router.delete("/", deleteOne);
-router.get("/", listValidator, validate, list);
+router.get("/", validate, list);
 router.get("/:id", findOne);
 
 export default router;

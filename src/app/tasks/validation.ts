@@ -1,17 +1,12 @@
 import { body, ValidationChain } from "express-validator";
 
-export const listValidator: ValidationChain[] = [
-	body("address")
+export const createValidator: ValidationChain[] = [
+	body("title")
 		.not()
 		.isEmpty()
 		.withMessage("Required")
 		.trim(),
-	body("password")
-		.not()
-		.isEmpty()
-		.withMessage("Required")
-		.trim(),
-	body("unlockDuration")
+	body("description")
 		.not()
 		.isEmpty()
 		.withMessage("Required")
