@@ -15,8 +15,14 @@ class Service {
 		}
 	}
 
-	public update() {
-
+	public async update(id: string, task: ITaskInput): Promise<ITaskModel | void> {
+		try {
+			task.modified = new Date();
+			return await TaskSchema.findByIdAndUpdate(id, task);
+		} catch (err) {
+			logger.error(err);
+			throw new UnexpectedError("Unable to update task", err);
+		}
 	}
 
 	public deleteOne() {

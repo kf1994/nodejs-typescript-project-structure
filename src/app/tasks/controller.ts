@@ -19,10 +19,10 @@ export const create = asyncHandler (async (req: Request, res: Response) => {
 	return new SuccessResponse("Task created successfully", data).send(res);
 });
 
-export const update = (req: Request, res: Response) => {
-
-	return res.status(200).send({ message: "update!" });
-};
+export const update = asyncHandler (async (req: Request, res: Response) => {
+	const data = await new Service().update(req.params.id, req.body);
+	return new SuccessResponse("Task updated successfully", data).send(res);
+});
 
 export const deleteOne = (req: Request, res: Response) => {
 
