@@ -10,6 +10,7 @@ import appRoutes from "./route-handler";
 import createLogger from "./core/Logger";
 import { NotFoundError } from "./core/Exceptions";
 import globalErrorHandler from "./common/middlewares/global-error-handler";
+import './config/db';
 
 const logger = createLogger("init");
 
