@@ -2,10 +2,16 @@ import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { DataValidationFailed } from "../../core/Exceptions";
 
-export const validate = (req: Request, res: Response, next: NextFunction) => {
+type AsyncFunction = (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => Promise<unknown>;
+
+export default (execution: AsyncFunction) => (req: Request, res: Response, next: NextFunction): any => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty())
 		throw new DataValidationFailed("Data validation failed", errors);
 
-	next();
+	execution(req, res, next).catch(next);
 };

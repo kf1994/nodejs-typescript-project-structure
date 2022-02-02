@@ -11,6 +11,7 @@ enum ErrorType {
 	NOT_FOUND = "NotFoundError",
 	INTERNAL = "InternalError",
 	DATA_VALIDATION_FAILED = "InvalidRequestData",
+	UNEXPECTED_ERROR = "UnexpectedError",
 }
 
 export abstract class BaseException extends Error {
@@ -29,6 +30,7 @@ export abstract class BaseException extends Error {
 			case ErrorType.NOT_FOUND:
 				return new NotFoundResponse(err.message).send(res);
 			case ErrorType.DATA_VALIDATION_FAILED:
+			case ErrorType.UNEXPECTED_ERROR:
 				return new DataValidationFailedResponse(err.message, err.data).send(res);
 			default:
 				return new InternalErrorResponse(err.message).send(res);
@@ -63,5 +65,11 @@ export class InternalError extends BaseException {
 export class DataValidationFailed extends BaseException {
 	constructor(message = "Invalid Request Data", protected data: any) {
 		super(ErrorType.DATA_VALIDATION_FAILED, message, data);
+	}
+}
+
+export class UnexpectedError extends BaseException {
+	constructor(message = "Something went wrong!", protected data: any) {
+		super(ErrorType.UNEXPECTED_ERROR, message, data);
 	}
 }

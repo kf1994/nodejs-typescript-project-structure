@@ -7,7 +7,7 @@ export interface ITaskModel extends Document {
 	modified: Date;
 }
 
-export interface ITask {
+export interface ITaskInput {
 	title: string;
 	description: string;
 	created?: Date;

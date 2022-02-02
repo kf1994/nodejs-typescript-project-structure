@@ -1,37 +1,34 @@
-import { Request, Response } from "express";
+import TaskSchema from "./model";
+import { ITaskInput, ITaskModel } from "./interfaces";
+import createLogger from "../../core/Logger";
+import { UnexpectedError } from "../../core/Exceptions";
+
+const logger = createLogger("tasks/service");
 
 class Service {
-	req: Request;
-	res: Response;
-
-	constructor(request: Request, response: Response) {
-		this.req = request;
-		this.res = response;
-	}
-
-	public create() {
-
-		return this.res.status(200).send({ message: "Created!" });
+	public async create(task: ITaskInput): Promise<ITaskModel | void> {
+		try {
+			return await TaskSchema.create(task);
+		} catch (err) {
+			logger.error(err);
+			throw new UnexpectedError("Unable to create new task", err);
+		}
 	}
 
 	public update() {
 
-		return this.res.status(200).send({ message: "update!" });
 	}
 
 	public deleteOne() {
 
-		return this.res.status(200).send({ message: "deleteOne" });
 	}
 
 	public findOne() {
 
-		return this.res.status(200).send({ message: "findOne" });
 	}
 
 	public list() {
 
-		return this.res.status(200).send({ message: "List" });
 	}
 }
 
