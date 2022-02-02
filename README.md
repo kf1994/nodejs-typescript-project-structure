@@ -12,3 +12,7 @@
 - run `npm start` in a production environment
 - run `npm run build` to build the ts file to js
 - run `npm run test` to run unit tests
+
+## TODO
+- [ ] Add auth
+- [ ] Write tests
