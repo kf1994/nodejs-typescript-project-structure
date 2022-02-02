@@ -5,7 +5,7 @@ import asyncHandler from "../../common/middlewares/asyncHandler";
 import { SuccessResponse } from "../../core/Responses";
 
 export const list = asyncHandler(async (req: Request, res: Response) => {
-	const data = await new Service().list();
+	const data = await new Service().list(Number(req.query.page), Number(req.query.pageSize));
 	return new SuccessResponse("Tasks", data).send(res);
 });
 

@@ -41,7 +41,8 @@ class Service {
 		return task;
 	}
 
-	public async list(): Promise<ITaskModel[] | void> {
+	public async list(page: number, pageSize: number): Promise<ITaskModel[] | void> {
+		if (page && pageSize) return TaskSchema.find().skip(page).limit(pageSize);
 		return TaskSchema.find();
 	}
 }
