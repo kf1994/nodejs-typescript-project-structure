@@ -4,10 +4,10 @@ import Service from "./service";
 import asyncHandler from "../../common/middlewares/asyncHandler";
 import { SuccessResponse } from "../../core/Responses";
 
-export const list = (req: Request, res: Response) => {
-
-	return res.status(200).send({ message: "list!" });
-};
+export const list = asyncHandler(async (req: Request, res: Response) => {
+	const data = await new Service().list();
+	return new SuccessResponse("Tasks", data).send(res);
+});
 
 export const findOne = asyncHandler(async (req: Request, res: Response) => {
 	const data = await new Service().findOne(req.params.id);

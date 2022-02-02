@@ -41,8 +41,8 @@ class Service {
 		return task;
 	}
 
-	public list() {
-
+	public async list(): Promise<ITaskModel[] | void> {
+		return TaskSchema.find();
 	}
 }
 
