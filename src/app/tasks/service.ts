@@ -1,7 +1,7 @@
 import TaskSchema from "./model";
 import { ITaskInput, ITaskModel } from "./interfaces";
 import createLogger from "../../core/Logger";
-import { UnexpectedError } from "../../core/Exceptions";
+import { NotFoundError, UnexpectedError } from "../../core/Exceptions";
 
 const logger = createLogger("tasks/service");
 
@@ -34,8 +34,11 @@ class Service {
 		}
 	}
 
-	public findOne() {
+	public async findOne(id: string): Promise<ITaskModel | void> {
+		const task: ITaskModel | null = await TaskSchema.findById(id);
+		if (!task) throw new NotFoundError(`Task with id = ${id} doesn't exists!`);
 
+		return task;
 	}
 
 	public list() {

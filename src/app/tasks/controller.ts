@@ -9,10 +9,10 @@ export const list = (req: Request, res: Response) => {
 	return res.status(200).send({ message: "list!" });
 };
 
-export const findOne = (req: Request, res: Response) => {
-
-	return res.status(200).send({ message: "findOne!" });
-};
+export const findOne = asyncHandler(async (req: Request, res: Response) => {
+	const data = await new Service().findOne(req.params.id);
+	return new SuccessResponse("Single task", data).send(res);
+});
 
 export const create = asyncHandler(async (req: Request, res: Response) => {
 	const data = await new Service().create(req.body);
