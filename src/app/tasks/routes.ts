@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", createValidator, create);
 router.put("/:id", updateValidator, update);
-router.delete("/", deleteOne);
+router.delete("/:id", deleteOne);
 router.get("/", list);
 router.get("/:id", findOne);
 

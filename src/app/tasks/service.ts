@@ -25,8 +25,13 @@ class Service {
 		}
 	}
 
-	public deleteOne() {
-
+	public async deleteOne(id: string): Promise<ITaskModel | void> {
+		try {
+			return await TaskSchema.findByIdAndRemove(id);
+		} catch (err) {
+			logger.error(err);
+			throw new UnexpectedError("Unable to delete task", err);
+		}
 	}
 
 	public findOne() {
