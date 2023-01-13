@@ -1,10 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-import { mongodbURI } from "./";
-import createLogger from "../core/Logger";
+import { mongodbURI } from './';
+import createLogger from '../core/Logger';
 
-const logger = createLogger("config/db");
+const logger = createLogger('config/db');
 
-mongoose.connect(mongodbURI)
-	.then(() => logger.info("MongoDB :: connected"))
-	.catch((err) => console.error(`MongoDB :: connection ${err}`));
+mongoose.set('strictQuery', false);
+
+mongoose
+  .connect(mongodbURI)
+  .then(() => logger.info('MongoDB :: connected'))
+  // eslint-disable-next-line no-console
+  .catch((err) => console.error(`MongoDB :: connection ${err}`));

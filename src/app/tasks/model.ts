@@ -1,24 +1,24 @@
 import { Schema, model } from 'mongoose';
 
 const TaskSchema = new Schema({
-	title: {
-		type: String,
-		required: true,
-		lowercase: true
-	},
-	description: {
-		type: String,
-		required: true,
-		lowercase: true
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	modified: {
-		type: Date,
-		default: Date.now
-	}
+  title: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
+  modified: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default model('Task', TaskSchema);

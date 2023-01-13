@@ -1,5 +1,5 @@
-declare module Express {
-	export interface Request {
-		startTime: any;
-	}
+declare namespace Express {
+  export interface Request {
+    startTime: any;
+  }
 }

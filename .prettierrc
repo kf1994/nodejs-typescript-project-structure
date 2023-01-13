@@ -1,18 +1,5 @@
 {
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": false,
-  "printWidth": 120,
-  "tabWidth": 4,
-  "useTabs": true,
-  "arrowParens": "avoid",
-  "watch": [
-    "src"
-  ],
-  "ext": ".ts,.js",
-  "ignore": [
-    "node_modules/"
-  ],
-  "exec": "ts-node ./src/server.ts"
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 120
 }
-  
